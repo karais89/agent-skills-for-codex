@@ -126,6 +126,8 @@ full 모델은 `README.md`, `AGENTS.md`, `ARCHITECTURE.md`, `docs/`를 포함하
 - 적용 도구 변경: `harness/scripts/apply-template.py`나 관련 테스트가 바뀐 경우.
 - 검증 정책 변경: 릴리즈 전 필수 명령, fixture smoke, 브라우저 smoke 기준이 바뀐 경우.
 
+릴리즈 후보와 태그 기준은 내부 운영 문서인 `docs/project/releases/`에 기록한다. 템플릿을 적용받는 대상 프로젝트에는 이 저장소의 릴리즈 기록을 복제하지 않는다.
+
 ## 검증
 
 하네스 템플릿은 이 저장소 루트에서 직접 실행해 검증하지 않는다. 먼저 템플릿을 테스트 프로젝트나 fixture에 적용하고, 그 적용 결과를 대상으로 검증한다.
