@@ -81,3 +81,52 @@ JSON
 ```
 
 예상 결과: 출력 JSON의 `additionalContext`에 `$harness-product-spec`와 `docs/product-specs/` 안내가 포함된다.
+
+## 반복 fixture 검증
+
+템플릿 적용 동작을 확인할 때는 저장소 루트가 아니라 `/tmp` 아래의 깨끗한 fixture 프로젝트를 사용한다. fixture 결과물은 검증용이며 이 저장소에 커밋하지 않는다.
+
+```bash
+FIXTURE="$(mktemp -d /tmp/harness-template-smoke.XXXXXX)"
+cp -R harness/templates/. "$FIXTURE/"
+cd "$FIXTURE"
+```
+
+적용 직후 설정과 alias hook을 확인한다.
+
+```bash
+python3 - <<'PY'
+import json
+import tomllib
+from pathlib import Path
+
+root = Path.cwd()
+json.loads((root / ".codex/hooks.json").read_text())
+tomllib.loads((root / ".codex/config.toml").read_text())
+for path in sorted((root / ".codex/agents").glob("*.toml")):
+    data = tomllib.loads(path.read_text())
+    assert data["name"] == path.stem
+    assert data["description"]
+    assert data["developer_instructions"]
+print("config ok")
+PY
+
+python3 .codex/hooks/user_prompt_submit.py <<'JSON'
+{"hook_event_name":"UserPromptSubmit","prompt":"spec: 메모 목록 기능을 정리해줘"}
+JSON
+```
+
+`codex exec` smoke는 같은 fixture에서 순서대로 실행한다. Codex CLI 기본 sandbox가 read-only인 환경에서는 파일 생성이 차단되므로 `--sandbox workspace-write`를 명시한다.
+
+```bash
+codex exec --skip-git-repo-check --sandbox workspace-write "spec: 메모 목록 기능 요구사항을 작성해줘. 메모 추가, 완료 토글, 삭제를 포함하고 로컬 저장소를 사용해줘."
+codex exec --skip-git-repo-check --sandbox workspace-write "plan: 방금 작성한 메모 목록 product spec을 구현 가능한 실행 계획으로 나눠줘."
+codex exec --skip-git-repo-check --sandbox workspace-write "build"
+```
+
+각 실행 뒤 다음을 확인한다.
+
+- `spec:`은 `docs/product-specs/<slug>.md`를 만든다.
+- `plan:`은 `docs/exec-plans/active/<slug>.md`를 만든다.
+- `build`는 active ExecPlan의 첫 미완료 항목을 대상으로 작업하고 검증 기록을 남긴다.
+- 루트 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`는 생성되지 않는다.
