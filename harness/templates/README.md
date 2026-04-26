@@ -1,17 +1,22 @@
-# 하네스 템플릿 README
+# 프로젝트 README
 
-이 디렉터리는 대상 프로젝트 루트에 복사해 사용할 repo-local Codex 하네스 템플릿이다. 문서 템플릿, 로컬 스킬, alias hook을 함께 제공한다.
+이 문서는 프로젝트의 짧은 시작점이다. 프로젝트의 목적, 실행 방법, 검증 방법을 이곳에 요약하고, 상세 요구사항과 실행 계획은 `docs/` 아래에 보관한다.
 
-## 구성
+## 프로젝트 개요
+
+- 목적: TBD
+- 주요 사용자: TBD
+- 실행 환경: TBD
+- 주요 진입점: TBD
+
+## 로컬 하네스
+
+이 프로젝트는 repo-local Codex 하네스를 사용한다. 하네스 설정은 프로젝트 안의 `.agents/`, `.codex/`, `AGENTS.md`, `docs/`에 들어 있으며 전역 Codex 설정을 바꾸지 않는다.
+
+## 문서 구조
 
 ```text
 .
-  .agents/skills/
-  .codex/
-    agents/
-    hooks/
-    config.toml
-    hooks.json
   AGENTS.md
   ARCHITECTURE.md
   docs/
@@ -27,9 +32,15 @@
     validation.md
 ```
 
+- `AGENTS.md`: Codex가 이 프로젝트에서 따라야 할 짧은 작업 지침.
+- `ARCHITECTURE.md`: 장기 구조, 주요 구성요소, 설계 결정.
+- `docs/product-specs/`: 기능 요구사항과 수용 기준.
+- `docs/exec-plans/`: 장시간 작업과 여러 단계 구현의 진행 상태.
+- `docs/validation.md`: 자주 쓰는 검증 명령과 수동 확인 기준.
+
 ## Alias 계약
 
-Codex TUI는 알 수 없는 `/spec` 같은 입력을 hook 실행 전에 slash command로 거부할 수 있다. 이 하네스는 slash command 대신 텍스트 alias와 직접 스킬 호출을 사용한다.
+Codex TUI는 알 수 없는 `/spec` 같은 입력을 prompt가 아니라 slash command로 먼저 해석할 수 있다. 이 프로젝트는 slash command 대신 텍스트 alias와 직접 스킬 호출을 사용한다.
 
 | 입력 alias | 사용할 Codex 스킬 | 산출물 |
 | --- | --- | --- |
@@ -43,16 +54,29 @@ Codex TUI는 알 수 없는 `/spec` 같은 입력을 hook 실행 전에 slash co
 
 `spec`, `plan`, `build` workflow는 루트 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`를 만들지 않는다.
 
-## 적용 방법
+## 시작 흐름
 
-1. 이 디렉터리의 내용을 대상 프로젝트 루트에 복사한다.
-2. `AGENTS.md`, `ARCHITECTURE.md`, `docs/README.md`, `docs/validation.md`의 자리표시자를 대상 프로젝트에 맞게 채운다.
-3. 필요한 첫 요구사항을 `spec:`으로 정리하고, 이어서 `plan:`, `build` 순서로 진행한다.
-4. 적용 뒤 아래 검증을 실행한다.
+1. 프로젝트 목적과 실행 환경을 이 README와 `ARCHITECTURE.md`에 간단히 적는다.
+2. 새 기능이나 제품 목표는 `spec:`으로 `docs/product-specs/`에 정리한다.
+3. 구현이 여러 단계라면 `plan:`으로 active ExecPlan을 만든다.
+4. `build`로 active ExecPlan의 첫 미완료 항목을 구현하고 검증 기록을 남긴다.
+5. 검증 명령이 정해지면 `docs/validation.md`의 기본 명령 표를 갱신한다.
 
-상세 테스트, 보안, 성능, 접근성 체크리스트는 기본 템플릿에 포함하지 않는다. 필요한 프로젝트에서 별도 문서로 추가한다.
+## 개발 명령
 
-## 빠른 검증
+프로젝트 스택이 정해지면 아래 항목을 실제 명령으로 교체한다.
+
+| 목적 | 명령 |
+| --- | --- |
+| 개발 서버 | TBD |
+| 테스트 | TBD |
+| 린트 | TBD |
+| 빌드 | TBD |
+| 타입 검사 | TBD |
+
+## 빠른 하네스 확인
+
+아래 명령은 로컬 Codex hook과 agent 설정이 파싱 가능한지 확인한다.
 
 ```bash
 python3 - <<'PY'
@@ -71,6 +95,8 @@ for path in sorted((root / ".codex/agents").glob("*.toml")):
 print("config ok")
 PY
 ```
+
+아래 명령은 `spec` alias가 product spec workflow로 안내되는지 확인한다.
 
 ```bash
 python3 .codex/hooks/user_prompt_submit.py <<'JSON'
@@ -82,52 +108,3 @@ JSON
 ```
 
 예상 결과: 출력 JSON의 `additionalContext`에 `$harness-product-spec`와 `docs/product-specs/` 안내가 포함된다.
-
-## 반복 fixture 검증
-
-템플릿 적용 동작을 확인할 때는 저장소 루트가 아니라 `/tmp` 아래의 깨끗한 fixture 프로젝트를 사용한다. fixture 결과물은 검증용이며 이 저장소에 커밋하지 않는다.
-
-```bash
-FIXTURE="$(mktemp -d /tmp/harness-template-smoke.XXXXXX)"
-cp -R harness/templates/. "$FIXTURE/"
-cd "$FIXTURE"
-```
-
-적용 직후 설정과 alias hook을 확인한다.
-
-```bash
-python3 - <<'PY'
-import json
-import tomllib
-from pathlib import Path
-
-root = Path.cwd()
-json.loads((root / ".codex/hooks.json").read_text())
-tomllib.loads((root / ".codex/config.toml").read_text())
-for path in sorted((root / ".codex/agents").glob("*.toml")):
-    data = tomllib.loads(path.read_text())
-    assert data["name"] == path.stem
-    assert data["description"]
-    assert data["developer_instructions"]
-print("config ok")
-PY
-
-python3 .codex/hooks/user_prompt_submit.py <<'JSON'
-{"hook_event_name":"UserPromptSubmit","prompt":"spec: 메모 목록 기능을 정리해줘"}
-JSON
-```
-
-`codex exec` smoke는 같은 fixture에서 순서대로 실행한다. Codex CLI 기본 sandbox가 read-only인 환경에서는 파일 생성이 차단되므로 `--sandbox workspace-write`를 명시한다.
-
-```bash
-codex exec --skip-git-repo-check --sandbox workspace-write "spec: 메모 목록 기능 요구사항을 작성해줘. 메모 추가, 완료 토글, 삭제를 포함하고 로컬 저장소를 사용해줘."
-codex exec --skip-git-repo-check --sandbox workspace-write "plan: 방금 작성한 메모 목록 product spec을 구현 가능한 실행 계획으로 나눠줘."
-codex exec --skip-git-repo-check --sandbox workspace-write "build"
-```
-
-각 실행 뒤 다음을 확인한다.
-
-- `spec:`은 `docs/product-specs/<slug>.md`를 만든다.
-- `plan:`은 `docs/exec-plans/active/<slug>.md`를 만든다.
-- `build`는 active ExecPlan의 첫 미완료 항목을 대상으로 작업하고 검증 기록을 남긴다.
-- 루트 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`는 생성되지 않는다.
