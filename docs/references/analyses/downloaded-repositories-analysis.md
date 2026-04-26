@@ -2,7 +2,7 @@
 
 확인일: 2026-04-26
 
-대상 경로: `reference-repos/`
+대상 경로: `reference-repos/adopted/`, `reference-repos/not-adopted/`
 
 ## 분석 기준
 
@@ -24,7 +24,7 @@
 
 ### openai-codex
 
-로컬 경로: `reference-repos/openai-codex`
+로컬 경로: `reference-repos/not-adopted/openai-codex`
 
 성격: OpenAI Codex CLI의 실제 구현 저장소다. Rust 워크스페이스가 중심이며, CLI, TUI, 프로토콜, 샌드박스, MCP, 플러그인, 스킬, 앱 서버 등 많은 크레이트로 세분화되어 있다.
 
@@ -50,7 +50,7 @@
 
 ### andrej-karpathy-skills
 
-로컬 경로: `reference-repos/andrej-karpathy-skills`
+로컬 경로: `reference-repos/adopted/andrej-karpathy-skills`
 
 성격: 단일 행동 지침에 가까운 경량 스킬 저장소다. 핵심은 “생각한 뒤 코딩, 단순성 우선, 외과적 변경, 목표 기반 실행” 네 가지 원칙이다.
 
@@ -74,7 +74,7 @@
 
 ### superpowers
 
-로컬 경로: `reference-repos/superpowers`
+로컬 경로: `reference-repos/not-adopted/superpowers`
 
 성격: 코딩 에이전트용 종합 개발 방법론이다. 브레인스토밍, 계획, TDD, 실행, 코드 리뷰, 검증, 브랜치 마무리까지 하나의 워크플로우로 묶는다.
 
@@ -101,7 +101,7 @@
 
 ### gstack
 
-로컬 경로: `reference-repos/gstack`
+로컬 경로: `reference-repos/not-adopted/gstack`
 
 성격: Claude Code 중심의 고밀도 AI 엔지니어링 워크플로우다. CEO, 엔지니어링 매니저, 디자이너, QA, 보안, 릴리스 엔지니어 같은 역할을 slash command와 스킬로 나눈다.
 
@@ -130,7 +130,7 @@
 
 ### agent-skills
 
-로컬 경로: `reference-repos/agent-skills`
+로컬 경로: `reference-repos/adopted/agent-skills`
 
 성격: 개발 생명주기를 기준으로 정리된 범용 에이전트 스킬 라이브러리다. define, plan, build, verify, review, ship 흐름이 명확하다.
 
@@ -159,7 +159,7 @@
 
 ### harness_framework
 
-로컬 경로: `reference-repos/harness_framework`
+로컬 경로: `reference-repos/not-adopted/harness_framework`
 
 성격: 한국어 기반의 장시간 작업 실행 하네스 템플릿이다. 문서 템플릿, phase/step 구조, 실행 스크립트를 갖춘다.
 
@@ -205,6 +205,10 @@
 docs/
 ├── README.md
 ├── references/
+│   ├── README.md
+│   ├── adopted/
+│   ├── not-adopted/
+│   └── analyses/
 ├── principles/
 │   ├── coding-agent-behavior.md
 │   ├── git-workflow.md

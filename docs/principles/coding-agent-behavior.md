@@ -63,7 +63,7 @@
 
 이 문서는 다음 자료에서 반복적으로 확인된 원칙을 현재 저장소에 맞게 축약한 것이다.
 
-- [초경량 하네스 선택 근거 분석](../references/lightweight-harness-selection-analysis.md)
-- [OpenAI Harness Engineering 참고](../references/openai-harness-engineering.md)
-- [OpenAI Codex 실행 계획 참고](../references/openai-codex-exec-plans.md)
-- [`andrej-karpathy-skills` 참고 저장소](../references/reference-repositories.md)
+- [초경량 하네스 선택 근거 분석](../references/analyses/lightweight-harness-selection-analysis.md)
+- [OpenAI Harness Engineering 참고](../references/adopted/openai-harness-engineering.md)
+- [OpenAI Codex 실행 계획 참고](../references/adopted/openai-codex-exec-plans.md)
+- [`andrej-karpathy-skills` 참고 저장소](../references/analyses/reference-repositories.md)

@@ -304,7 +304,7 @@ Anthropic 문서는 초경량 하네스의 기본 골격이 아니라 강화 옵
 ## v0.0에 포함할 것
 
 - 짧은 `AGENTS.md`와 상세 `docs/` 구조 유지
-- 참고 문서와 결정 근거를 `docs/references/`에 남기는 규칙
+- 참고 문서와 결정 근거를 `docs/references/adopted/`, `docs/references/not-adopted/`, `docs/references/analyses/`로 나누어 남기는 규칙
 - 큰 작업 전 실행 계획 작성 또는 갱신
 - 작업 규모에 따른 하네스 강도 조절
 - 의미 있는 작업 단위별 검증과 커밋
