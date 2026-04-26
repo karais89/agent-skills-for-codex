@@ -6,10 +6,12 @@
 
 - [프로젝트 운영 문서 기준](project/README.md)
 - [코딩 에이전트 행동 원칙](project/principles/coding-agent-behavior.md)
+- [내부 실행 계획 기준](project/plans/README.md)
 
 ## 하네스 산출물
 
 - [하네스 산출물 기준](../harness/README.md)
+- [하네스 템플릿 기준](../harness/templates/README.md)
 
 ## 참고 문서
 
@@ -20,9 +22,9 @@
 - [OpenAI Harness Engineering 참고](references/adopted/openai-harness-engineering.md)
 - [OpenAI Codex 실행 계획 참고](references/adopted/openai-codex-exec-plans.md)
 
-### 채택하지 않은 참고 자료
+### 보조 참고 자료
 
-- [Anthropic 장시간 앱 개발 하네스 설계 참고](references/not-adopted/anthropic-harness-design-long-running-apps.md)
+- [Anthropic 장시간 앱 개발 하네스 설계 참고](references/supporting/anthropic-harness-design-long-running-apps.md)
 
 ### 분석과 목록
 

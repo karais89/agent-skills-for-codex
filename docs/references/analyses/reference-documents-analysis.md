@@ -38,8 +38,9 @@ OpenAI Exec Plans는 계획 문서를 살아 있는 문서로 취급한다. Anth
 
 이 프로젝트의 적용:
 
-- 큰 작업은 `docs/plans/active/` 아래에 계획 문서로 관리한다.
-- 완료된 계획은 `docs/plans/completed/`로 옮긴다.
+- 이 저장소의 큰 작업은 `docs/project/plans/active/` 아래에 계획 문서로 관리한다.
+- 완료된 내부 계획은 `docs/project/plans/completed/`로 옮긴다.
+- 다른 프로젝트에 적용할 계획 문서 양식은 `harness/templates/` 아래에 템플릿으로 둔다.
 - 계획 문서에는 진행 상황, 결정 로그, 검증 기준, 복구 방법을 포함한다.
 
 ### 3. 검증은 에이전트 바깥에 둔다
@@ -105,7 +106,7 @@ Anthropic 문서는 모델 성능이 변하면 하네스 구성 요소도 달라
 
 이 프로젝트에서의 역할:
 
-- `docs/plans/`의 기본 템플릿으로 삼는다.
+- `docs/project/plans/`의 내부 계획 형식과 `harness/templates/`의 대상 프로젝트용 템플릿을 설계할 때 기준으로 삼는다.
 - 복잡한 기능, 리팩터링, 마이그레이션 전에 작성할 계획 문서 기준으로 쓴다.
 - 작업이 진행될수록 계획 문서도 함께 갱신하는 규칙의 근거로 쓴다.
 
@@ -164,16 +165,16 @@ Anthropic 문서는 모델 성능이 변하면 하네스 구성 요소도 달라
 
 운영 방식:
 
-- `docs/plans/active/`에 실행 계획을 만든다.
+- `docs/project/plans/active/`에 실행 계획을 만든다.
 - 필요하면 스프린트 계약 또는 phase/step 문서를 추가한다.
 - 구현자와 평가자의 관점을 분리한다.
 - 진행 상황, 발견 사항, 결정 로그, 검증 결과를 계속 갱신한다.
-- 완료 후 `docs/plans/completed/`로 이동하고 결과 회고를 남긴다.
+- 완료 후 `docs/project/plans/completed/`로 이동하고 결과 회고를 남긴다.
 
 ## 도입 순서
 
-1. `docs/plans/active/`와 `docs/plans/completed/` 디렉터리를 만든다.
-2. OpenAI Exec Plans 기반의 한국어 실행 계획 템플릿을 만든다.
+1. `docs/project/plans/active/`와 `docs/project/plans/completed/` 디렉터리를 만든다.
+2. OpenAI Exec Plans 기반의 한국어 실행 계획 템플릿을 `harness/templates/`에 만든다.
 3. Anthropic 문서의 스프린트 계약을 축약한 작업 단위 템플릿을 만든다.
 4. UI 작업용 브라우저 검증 체크리스트를 만든다.
 5. 반복되는 phase/step 실행이 생기면 `harness_framework`를 참고해 Codex 친화 실행기를 설계한다.

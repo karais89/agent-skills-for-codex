@@ -296,7 +296,7 @@ Anthropic 문서는 초경량 하네스의 기본 골격이 아니라 강화 옵
 | 운영 철학 | OpenAI Harness Engineering | 저장소 문서, 검증 명령, 피드백 루프 중심으로 설계한다. |
 | 기본 생명주기 | `agent-skills` | `define → plan → build → verify → review → ship` 흐름을 축약해 쓴다. |
 | 행동 원칙 | `andrej-karpathy-skills` | 작게 바꾸고, 가정을 줄이고, 검증 후 완료한다. |
-| 큰 작업 계획 | OpenAI Codex 실행 계획 | 살아 있는 계획 문서를 `docs/plans/` 계열로 관리한다. |
+| 큰 작업 계획 | OpenAI Codex 실행 계획 | 내부 작업 계획은 `docs/project/plans/`, 대상 프로젝트용 템플릿은 `harness/templates/`로 나누어 관리한다. |
 | 검증 강화 | `superpowers`, Anthropic Harness Design | 복잡한 작업에서 계획, 테스트, 평가자 관점을 강화한다. |
 | UI와 릴리스 품질 | `gstack`, Anthropic Harness Design | 브라우저 검증, QA 관점, 문서 갱신 기준만 가져온다. |
 | 장시간 자동 실행 | `harness_framework` | v0.0에서는 보류하고, 반복 필요가 확인되면 Codex용으로 재설계한다. |
@@ -305,7 +305,7 @@ Anthropic 문서는 초경량 하네스의 기본 골격이 아니라 강화 옵
 
 - 짧은 `AGENTS.md`와 상세 `docs/` 구조 유지
 - 이 저장소 운영 문서는 `docs/project/`, 다른 프로젝트에 적용할 산출물은 `harness/`로 분리
-- 참고 문서와 결정 근거를 `docs/references/adopted/`, `docs/references/not-adopted/`, `docs/references/analyses/`로 나누어 남기는 규칙
+- 참고 문서와 결정 근거를 `docs/references/adopted/`, `docs/references/supporting/`, `docs/references/analyses/`로 나누어 남기는 규칙
 - 큰 작업 전 실행 계획 작성 또는 갱신
 - 작업 규모에 따른 하네스 강도 조절
 - 의미 있는 작업 단위별 검증과 커밋
