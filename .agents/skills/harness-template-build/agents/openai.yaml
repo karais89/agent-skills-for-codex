@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Template Build"
+  short_description: "Build or compare harness templates"
+  default_prompt: "Check whether harness source matches templates"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Exec Plan"
+  short_description: "Create active execution plans"
+  default_prompt: "plan: break the request into an ExecPlan"

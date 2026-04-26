@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Template Validate"
+  short_description: "Validate harness template integrity"
+  default_prompt: "Validate the harness template"

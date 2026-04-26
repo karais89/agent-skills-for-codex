@@ -1,0 +1,20 @@
+[template]
+name = "full"
+description = "Full repo-local Codex harness template"
+source = "harness/source/full/root"
+output = "harness/templates"
+
+[policy]
+distribution_model = "full"
+managed_output = true
+include_agent_skills = true
+include_codex_hooks = true
+include_specialist_agents = true
+include_supplementary_references = false
+
+[forbidden]
+paths = [
+  "SPEC.md",
+  "tasks/plan.md",
+  "tasks/todo.md",
+]
