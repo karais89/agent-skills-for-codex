@@ -13,6 +13,7 @@
 | Superpower 스킬 참고 | https://github.com/obra/superpowers | `reference-repos/superpowers` | `6efe32c Use committed Codex plugin files in sync script` |
 | gstack 스킬 참고 | https://github.com/garrytan/gstack | `reference-repos/gstack` | `23c4d7b v1.13.0.0 feat: add Claude outside-voice skill (#1212)` |
 | agent-skills 스킬 참고 | https://github.com/addyosmani/agent-skills | `reference-repos/agent-skills` | `44b9e37 Merge pull request #66 from datfinesoul/opencode-skills` |
+| Harness framework 참고 | https://github.com/jha0313/harness_framework | `reference-repos/harness_framework` | `da676bc chore: add .gitignore for build artifacts` |
 
 ## 운영 규칙
 
