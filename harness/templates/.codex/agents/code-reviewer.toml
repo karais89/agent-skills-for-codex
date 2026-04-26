@@ -95,5 +95,5 @@ Categorize every finding:
 - **Invoke directly when:** the user asks for a review of a specific change, file, or PR.
 - **Invoke via:** `review` or `review:` text aliases, direct `$agent-skills-review` skill mention, or `spawn_agent` with `agent_type = "code-reviewer"`.
 - **Ship orchestration:** `$agent-skills-ship` may fan out to this role alongside `security-auditor` and `test-engineer` by spawning subagents with explicit `agent_type` values.
-- **Do not invoke from another persona.** If you find yourself wanting to delegate to `security-auditor` or `test-engineer`, surface that as a recommendation in your report instead. Orchestration belongs to Codex wrapper skills or the parent session, not to specialist personas. See this repository's AGENTS.md and docs/references/orchestration-patterns.md.
+- **Do not invoke from another persona.** If you find yourself wanting to delegate to `security-auditor` or `test-engineer`, surface that as a recommendation in your report instead. Orchestration belongs to Codex wrapper skills or the parent session, not to specialist personas. Follow this repository's AGENTS.md for local routing rules.
 '''

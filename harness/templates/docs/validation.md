@@ -29,19 +29,19 @@
 
 - 키보드 조작, focus 표시, 스크린 리더 label을 확인한다.
 - 작은 화면과 긴 텍스트에서 겹침이나 잘림이 없는지 확인한다.
-- 필요한 경우 [접근성 체크리스트](references/accessibility-checklist.md)를 사용한다.
+- 필요한 경우 프로젝트별 접근성 체크리스트를 별도 문서로 추가한다.
 
 ### 보안 관련 변경
 
 - secret이 코드와 로그에 노출되지 않는지 확인한다.
 - dependency 변경이 있으면 audit을 실행한다.
-- [보안 체크리스트](references/security-checklist.md)를 사용한다.
+- 필요한 경우 프로젝트별 보안 체크리스트를 별도 문서로 추가한다.
 
 ### 성능 관련 변경
 
 - 최적화 전후 측정값을 비교한다.
 - p95 또는 p99 latency를 확인한다.
-- [성능 체크리스트](references/performance-checklist.md)를 사용한다.
+- 필요한 경우 프로젝트별 성능 체크리스트를 별도 문서로 추가한다.
 
 ## 검증 로그
 

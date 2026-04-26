@@ -314,7 +314,7 @@ npx lhci autorun
 
 ## See Also
 
-For detailed performance checklists, optimization commands, and anti-pattern reference, see `../../../docs/references/performance-checklist.md`.
+For detailed performance checklists beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 
 ## Common Rationalizations

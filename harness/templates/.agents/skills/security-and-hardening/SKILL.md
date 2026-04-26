@@ -314,7 +314,7 @@ git diff --cached | grep -i "password\|secret\|api_key\|token"
 ```
 ## See Also
 
-For detailed security checklists and pre-commit verification steps, see `../../../docs/references/security-checklist.md`.
+For detailed security checklists beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 ## Common Rationalizations
 

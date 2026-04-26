@@ -8,7 +8,7 @@
 
 ## 현재 상태
 
-- `harness/templates/` 아래에 문서 템플릿, repo-local `.agents`, `.codex`, `docs/references` 하네스 구성을 작성했다.
+- `harness/templates/` 아래에 문서 템플릿, repo-local `.agents`, `.codex` 하네스 구성을 작성했다.
 - `agent-skills-test`의 추적 가능한 repo-local 하네스 구성만 선별해 반영했고, 실험 산출물(`SPEC.md`, `tasks/`, `todo-app/`, `tmp/`)은 제외했다.
 - 기존 `agent-skills-spec`, `agent-skills-plan`, `agent-skills-build` wrapper 대신 `harness-product-spec`, `harness-exec-plan`, `harness-exec-build` wrapper를 템플릿에 추가했다.
 - hook과 안내 문서는 `spec`, `plan`, `build`, `test`, `review` alias 계약을 기준으로 갱신했다.
@@ -35,7 +35,7 @@ v0.1에서 다루는 범위는 다음과 같다.
 - 제품 요구사항을 위한 `docs/product-specs/` 구조와 템플릿 작성
 - 장시간 작업과 큰 변경을 위한 `docs/exec-plans/` 구조와 실행 계획 템플릿 작성
 - 검증 기준을 기록하는 문서 템플릿 작성
-- `agent-skills-test`의 `.agents/skills/`, `.codex/`, `docs/references/` 중 추적 가능한 하네스 구성 반영
+- `agent-skills-test`의 `.agents/skills/`, `.codex/` 중 추적 가능한 하네스 구성 반영
 - 기존 `agent-skills-spec`, `agent-skills-plan`, `agent-skills-build` wrapper를 새 `harness-product-spec`, `harness-exec-plan`, `harness-exec-build` wrapper로 교체
 - `user_prompt_submit.py`, `session_start.py`, `AGENTS.md`, `harness/templates/README.md`의 alias 안내를 새 계약에 맞게 갱신
 - 템플릿 문서 간 링크와 공통 용어 정리
@@ -58,7 +58,7 @@ v0.1에서 다루는 범위는 다음과 같다.
 - [x] `harness/templates/docs/exec-plans/README.md`와 `template.md`를 작성한다.
 - [x] `harness/templates/docs/exec-plans/active/`와 `completed/`를 Git에 보존할 자리표시자를 작성한다.
 - [x] `harness/templates/docs/validation.md` 초안을 작성한다.
-- [x] `harness/templates/docs/references/*.md`를 반영한다.
+- [x] `docs/references` 보조 체크리스트는 기본 템플릿에서 제외하고, 스킬 내부 링크는 upstream 참고 안내로 낮춘다.
 - [x] `SPEC.md`, `tasks/`, `todo-app/`, `tmp/`가 템플릿에 포함되지 않았는지 확인한다.
 - [x] 문서 간 상대 링크가 실제 경로와 맞는지 확인한다.
 - [x] `harness/templates/README.md`가 v0.1 템플릿 목록, alias 계약, 검증 방법을 반영하게 갱신한다.
@@ -82,7 +82,6 @@ v0.1에서 다루는 범위는 다음과 같다.
 - `harness/templates/docs/exec-plans/active/.gitkeep`
 - `harness/templates/docs/exec-plans/completed/.gitkeep`
 - `harness/templates/docs/validation.md`
-- `harness/templates/docs/references/*.md`
 
 ## 제외 항목
 
@@ -93,6 +92,7 @@ v0.1에서 다루는 범위는 다음과 같다.
 - 대상 프로젝트 루트에 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`를 만드는 기존 workflow
 - `agent-skills-spec`, `agent-skills-plan`, `agent-skills-build` wrapper 유지
 - `test`, `review`, `code-simplify`, `ship` wrapper 재설계
+- upstream `agent-skills`의 보조 reference 체크리스트를 `docs/references/`로 기본 vendoring
 - phase/step 실행기나 큰 자동화 구조 설계
 - UI 프로젝트 전용 브라우저 검증 기준 작성
 - 내부 운영 문서 전체 리팩터링
@@ -127,6 +127,7 @@ v0.1 템플릿 구현이 끝나면 다음 기준으로 확인한다.
 | 2026-04-26 | destructive command hook | `rm -rf .agents`를 `pre_tool_use.py`로 실행 | exit 2로 차단됨 |
 | 2026-04-26 | session start hook | `session_start.py` 실행 | 새 alias 계약과 legacy 파일 금지 안내 출력 |
 | 2026-04-26 | 제외 항목 확인 | `harness/templates`에서 `SPEC.md`, `tasks`, `todo-app`, `tmp`, 기존 spec/plan/build wrapper 검색 | 포함되지 않음 |
+| 2026-04-26 | references 제외 확인 | `harness/templates`에서 `docs/references` 직접 참조 검색 | 기본 템플릿에서 `docs/references` 제외, 스킬은 upstream references 선택 참고로 정리 |
 | 2026-04-26 | smoke: `spec` | `/tmp` fixture에 템플릿을 적용하고 `codex exec --skip-git-repo-check "spec: ..."` 실행 | `docs/product-specs/memo-list.md` 생성, 루트 `SPEC.md`와 `tasks/` 미생성 |
 | 2026-04-26 | smoke: `plan` | 같은 fixture에서 `codex exec --skip-git-repo-check "plan: ..."` 실행 | `docs/exec-plans/active/memo-list.md` 생성, legacy 산출물 미생성 |
 | 2026-04-26 | smoke: `build` | 같은 fixture에서 `codex exec --skip-git-repo-check "build"` 실행 | active ExecPlan을 읽고 작업 1 구현과 검증 기록을 추가함. Node 테스트와 문법 검사는 통과했지만 HTTP 서버, Playwright, GUI 브라우저 확인은 환경 제약으로 차단되어 체크박스는 미완료로 유지됨 |

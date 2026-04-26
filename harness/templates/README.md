@@ -1,6 +1,6 @@
 # 하네스 템플릿 README
 
-이 디렉터리는 대상 프로젝트 루트에 복사해 사용할 repo-local Codex 하네스 템플릿이다. 문서 템플릿, 로컬 스킬, alias hook, 검증 참고 문서를 함께 제공한다.
+이 디렉터리는 대상 프로젝트 루트에 복사해 사용할 repo-local Codex 하네스 템플릿이다. 문서 템플릿, 로컬 스킬, alias hook을 함께 제공한다.
 
 ## 구성
 
@@ -24,7 +24,6 @@
       active/
       completed/
       template.md
-    references/
     validation.md
 ```
 
@@ -50,6 +49,8 @@ Codex TUI는 알 수 없는 `/spec` 같은 입력을 hook 실행 전에 slash co
 2. `AGENTS.md`, `ARCHITECTURE.md`, `docs/README.md`, `docs/validation.md`의 자리표시자를 대상 프로젝트에 맞게 채운다.
 3. 필요한 첫 요구사항을 `spec:`으로 정리하고, 이어서 `plan:`, `build` 순서로 진행한다.
 4. 적용 뒤 아래 검증을 실행한다.
+
+상세 테스트, 보안, 성능, 접근성 체크리스트는 기본 템플릿에 포함하지 않는다. 필요한 프로젝트에서 별도 문서로 추가한다.
 
 ## 빠른 검증
 

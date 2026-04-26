@@ -312,8 +312,7 @@ Part of code review is dependency review:
 ```
 ## See Also
 
-- For detailed security review guidance, see `../../../docs/references/security-checklist.md`
-- For performance review checks, see `../../../docs/references/performance-checklist.md`
+- For detailed security or performance review checklists beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 ## Common Rationalizations
 

@@ -344,7 +344,7 @@ This separation ensures the test is written without knowledge of the fix, making
 
 ## See Also
 
-For detailed testing patterns, examples, and anti-patterns across frameworks, see `../../../docs/references/testing-patterns.md`.
+For detailed testing patterns beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 ## Common Rationalizations
 

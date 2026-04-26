@@ -9,7 +9,6 @@
 - `.codex/hooks.json`, `.codex/hooks/*.py`: alias routing과 안전 정책을 정의한다.
 - `docs/product-specs/`: 제품 요구사항과 수용 기준을 둔다.
 - `docs/exec-plans/`: 장시간 작업과 큰 변경의 실행 계획을 둔다.
-- `docs/references/`: 테스트, 보안, 성능, 접근성, 오케스트레이션 참고 문서를 둔다.
 
 ## Alias 매핑
 
@@ -34,6 +33,7 @@ Codex TUI는 알 수 없는 `/spec` 같은 입력을 prompt가 아니라 slash c
 - 큰 변경은 `docs/exec-plans/active/`의 실행 계획을 먼저 만들거나 갱신한다.
 - 구현 후에는 관련 검증을 실행하고 결과를 ExecPlan 또는 완료 보고에 남긴다.
 - 사용자가 만들었을 수 있는 변경은 되돌리지 않는다.
+- 세부 테스트, 보안, 성능, 접근성 체크리스트가 필요하면 프로젝트 문서에 별도로 추가한다.
 
 ## 전문 에이전트
 

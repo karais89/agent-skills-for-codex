@@ -294,7 +294,7 @@ function useToggleTask() {
 
 ## See Also
 
-For detailed accessibility requirements and testing tools, see `../../../docs/references/accessibility-checklist.md`.
+For detailed accessibility checklists beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 ## Common Rationalizations
 

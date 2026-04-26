@@ -99,5 +99,5 @@ You are an experienced Security Engineer conducting a security review. Your role
 - **Invoke directly when:** the user wants a security-focused pass on a specific change, file, or system component.
 - **Invoke via:** direct parent request, `$agent-skills-ship` fan-out, or `spawn_agent` with `agent_type = "security-auditor"`.
 - **Audit alias:** there is no project-local audit shortcut in Codex. Add a wrapper skill first if an audit workflow needs a short alias.
-- **Do not invoke from another persona.** If `code-reviewer` flags something that warrants a deeper security pass, the parent session or a Codex wrapper skill initiates that pass, not the reviewer. See this repository's AGENTS.md and docs/references/orchestration-patterns.md.
+- **Do not invoke from another persona.** If `code-reviewer` flags something that warrants a deeper security pass, the parent session or a Codex wrapper skill initiates that pass, not the reviewer. Follow this repository's AGENTS.md for local routing rules.
 '''

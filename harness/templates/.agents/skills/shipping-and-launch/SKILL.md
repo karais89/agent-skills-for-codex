@@ -265,9 +265,7 @@ Every deployment needs a rollback plan before it happens:
 ```
 ## See Also
 
-- For security pre-launch checks, see `../../../docs/references/security-checklist.md`
-- For performance pre-launch checklist, see `../../../docs/references/performance-checklist.md`
-- For accessibility verification before launch, see `../../../docs/references/accessibility-checklist.md`
+- For detailed security, performance, or accessibility launch checklists beyond this workflow, consult the upstream agent-skills references only when you have that repository available. This template does not vendor supplementary references by default.
 
 ## Common Rationalizations
 

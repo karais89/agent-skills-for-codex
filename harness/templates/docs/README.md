@@ -1,6 +1,6 @@
 # 문서 색인
 
-이 디렉터리는 프로젝트 요구사항, 실행 계획, 검증 기준, 참고 문서를 보관한다.
+이 디렉터리는 프로젝트 요구사항, 실행 계획, 검증 기준을 보관한다.
 
 ## 제품 요구사항
 
@@ -21,11 +21,8 @@
 ## 검증
 
 - [검증 기록과 기준](validation.md)
-- [테스트 패턴](references/testing-patterns.md)
-- [보안 체크리스트](references/security-checklist.md)
-- [성능 체크리스트](references/performance-checklist.md)
-- [접근성 체크리스트](references/accessibility-checklist.md)
-- [오케스트레이션 패턴](references/orchestration-patterns.md)
+
+상세 테스트 패턴, 보안 체크리스트, 성능 체크리스트, 접근성 체크리스트는 프로젝트 필요에 따라 별도 문서로 추가한다.
 
 ## 금지된 legacy 산출물
 
