@@ -204,28 +204,35 @@
 ```text
 docs/
 ├── README.md
+├── project/
+│   ├── README.md
+│   ├── principles/
+│   │   ├── coding-agent-behavior.md
+│   │   ├── git-workflow.md
+│   │   └── review-quality-gates.md
+│   └── plans/
+│       ├── active/
+│       └── completed/
 ├── references/
 │   ├── README.md
 │   ├── adopted/
 │   ├── not-adopted/
 │   └── analyses/
-├── principles/
-│   ├── coding-agent-behavior.md
-│   ├── git-workflow.md
-│   └── review-quality-gates.md
-├── plans/
-│   ├── active/
-│   └── completed/
-└── harness/
-    ├── phase-step-format.md
-    └── evaluation-loop.md
+```
+
+```text
+harness/
+├── README.md
+├── templates/
+├── skills/
+└── scripts/
 ```
 
 아직 실제 제품 코드가 없으므로 `src/` 구조나 기술 스택 문서를 먼저 만들기보다, 에이전트 작업 방식과 문서 운영 규칙부터 정리하는 편이 낫다.
 
 ## 다음 단계 제안
 
-1. `karpathy-guidelines`, `agent-skills`, `superpowers`에서 공통으로 반복되는 원칙을 합쳐 `docs/principles/coding-agent-behavior.md`를 만든다.
+1. `karpathy-guidelines`, `agent-skills`, `superpowers`에서 공통으로 반복되는 원칙을 합쳐 `docs/project/principles/coding-agent-behavior.md`를 만든다.
 2. `agent-skills`의 생명주기를 기준으로 `spec → plan → build → verify → review → ship` 문서 흐름을 정의한다.
 3. OpenAI Exec Plans와 `superpowers/writing-plans`를 비교해 이 프로젝트용 실행 계획 템플릿을 만든다.
 4. `harness_framework`를 Codex 친화적으로 이식할지 검토한다. 이때 넓은 `git add -A`, Claude CLI 직접 호출, hook 명령을 그대로 쓰지 않는다.

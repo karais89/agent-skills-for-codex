@@ -304,6 +304,7 @@ Anthropic 문서는 초경량 하네스의 기본 골격이 아니라 강화 옵
 ## v0.0에 포함할 것
 
 - 짧은 `AGENTS.md`와 상세 `docs/` 구조 유지
+- 이 저장소 운영 문서는 `docs/project/`, 다른 프로젝트에 적용할 산출물은 `harness/`로 분리
 - 참고 문서와 결정 근거를 `docs/references/adopted/`, `docs/references/not-adopted/`, `docs/references/analyses/`로 나누어 남기는 규칙
 - 큰 작업 전 실행 계획 작성 또는 갱신
 - 작업 규모에 따른 하네스 강도 조절
@@ -322,9 +323,9 @@ Anthropic 문서는 초경량 하네스의 기본 골격이 아니라 강화 옵
 
 ## 다음 문서화 순서
 
-1. `docs/principles/coding-agent-behavior.md`에서 기본 행동 원칙을 정리한다.
-2. `docs/principles/work-lifecycle.md`에서 `define → plan → build → verify → review → ship` 흐름을 이 프로젝트에 맞게 축약한다.
-3. `docs/plans/` 구조와 실행 계획 템플릿을 만든다.
+1. `docs/project/principles/coding-agent-behavior.md`에서 이 저장소의 기본 행동 원칙을 정리한다.
+2. `docs/project/principles/work-lifecycle.md`에서 `define → plan → build → verify → review → ship` 흐름을 이 프로젝트에 맞게 축약한다.
+3. `harness/` 아래에 대상 프로젝트용 실행 계획 템플릿을 만든다.
 4. UI 작업이 실제로 생길 때 브라우저 검증 체크리스트를 별도 문서로 추가한다.
 5. 장시간 반복 작업이 생긴 뒤에만 `harness_framework`식 phase/step 실행기를 재검토한다.
 

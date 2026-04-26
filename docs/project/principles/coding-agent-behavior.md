@@ -1,8 +1,10 @@
-# 코딩 에이전트 행동 원칙
+# 이 저장소의 코딩 에이전트 행동 원칙
 
 ## 목적
 
-이 문서는 코딩 에이전트가 이 저장소에서 수행하는 모든 작업의 기본 행동 기준을 정의한다. 문서 작성, 코드 변경, 리뷰, 검증, 커밋, 완료 보고에 모두 적용한다.
+이 문서는 코딩 에이전트가 이 저장소를 개발하고 운영할 때 따르는 기본 행동 기준을 정의한다. 문서 작성, 코드 변경, 리뷰, 검증, 커밋, 완료 보고에 모두 적용한다.
+
+이 문서는 다른 프로젝트에 그대로 배포할 하네스 산출물이 아니다. 재사용 가능한 규칙으로 승격할 내용은 `harness/` 아래에 별도 템플릿이나 산출물로 정리한다.
 
 목표는 절차를 무겁게 만드는 것이 아니라, 에이전트가 반복해서 같은 품질 기준으로 일하도록 최소한의 규범을 제공하는 것이다. 세부 워크플로우나 자동화는 작업 성격에 따라 달라질 수 있지만, 이 문서의 원칙은 기본값으로 따른다.
 
@@ -63,7 +65,7 @@
 
 이 문서는 다음 자료에서 반복적으로 확인된 원칙을 현재 저장소에 맞게 축약한 것이다.
 
-- [초경량 하네스 선택 근거 분석](../references/analyses/lightweight-harness-selection-analysis.md)
-- [OpenAI Harness Engineering 참고](../references/adopted/openai-harness-engineering.md)
-- [OpenAI Codex 실행 계획 참고](../references/adopted/openai-codex-exec-plans.md)
-- [`andrej-karpathy-skills` 참고 저장소](../references/analyses/reference-repositories.md)
+- [초경량 하네스 선택 근거 분석](../../references/analyses/lightweight-harness-selection-analysis.md)
+- [OpenAI Harness Engineering 참고](../../references/adopted/openai-harness-engineering.md)
+- [OpenAI Codex 실행 계획 참고](../../references/adopted/openai-codex-exec-plans.md)
+- [`andrej-karpathy-skills` 참고 저장소](../../references/analyses/reference-repositories.md)
