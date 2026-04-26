@@ -13,4 +13,4 @@
 
 | 버전 | 상태 | 문서 | 요약 |
 | --- | --- | --- | --- |
-| `harness-template-v0.1` | 릴리즈 후보 | [harness-template-v0.1.md](harness-template-v0.1.md) | full repo-local Codex 하네스 템플릿 첫 릴리즈 후보 |
+| `harness-template-v0.1` | 릴리즈 | [harness-template-v0.1.md](harness-template-v0.1.md) | full repo-local Codex 하네스 템플릿 첫 릴리즈 |
