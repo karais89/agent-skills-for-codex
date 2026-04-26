@@ -2,6 +2,10 @@
 
 이 디렉터리는 프로젝트 운영과 에이전트 작업에 필요한 참고 문서를 보관한다. 모든 문서는 한글로 작성한다.
 
+## 원칙 문서
+
+- [코딩 에이전트 행동 원칙](principles/coding-agent-behavior.md)
+
 ## 참고 문서
 
 - [참고 저장소 목록](references/reference-repositories.md)
