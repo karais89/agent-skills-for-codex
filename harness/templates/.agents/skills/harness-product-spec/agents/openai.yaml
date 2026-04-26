@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Product Spec"
+  short_description: "Create repository product specs"
+  default_prompt: "spec: describe the product change"

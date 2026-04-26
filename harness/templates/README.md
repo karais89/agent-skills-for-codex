@@ -1,25 +1,83 @@
-# 하네스 템플릿 기준
+# 하네스 템플릿 README
 
-`harness/templates/`는 다른 프로젝트에 적용할 수 있는 문서 템플릿을 보관한다. 이 저장소 내부 운영 문서를 그대로 복사하지 않고, 대상 프로젝트 사용자가 바로 채울 수 있는 형태로 작성한다.
+이 디렉터리는 대상 프로젝트 루트에 복사해 사용할 repo-local Codex 하네스 템플릿이다. 문서 템플릿, 로컬 스킬, alias hook, 검증 참고 문서를 함께 제공한다.
 
-## 예정 템플릿
-
-`harness/templates/`의 하위 구조는 대상 프로젝트 루트 기준 경로를 그대로 미러링한다.
+## 구성
 
 ```text
-harness/templates/
+.
+  .agents/skills/
+  .codex/
+    agents/
+    hooks/
+    config.toml
+    hooks.json
   AGENTS.md
   ARCHITECTURE.md
   docs/
     README.md
+    product-specs/
+      index.md
+      template.md
     exec-plans/
       README.md
       active/
       completed/
       template.md
+    references/
     validation.md
 ```
 
-빈 디렉터리는 구현 시 자리표시자나 안내 파일로 Git에 보존한다.
+## Alias 계약
 
-템플릿을 추가할 때는 적용 대상, 필수 입력, 기대 결과, 검증 방법을 함께 설명한다.
+Codex TUI는 알 수 없는 `/spec` 같은 입력을 hook 실행 전에 slash command로 거부할 수 있다. 이 하네스는 slash command 대신 텍스트 alias와 직접 스킬 호출을 사용한다.
+
+| 입력 alias | 사용할 Codex 스킬 | 산출물 |
+| --- | --- | --- |
+| `spec`, `spec:` | `$harness-product-spec` | `docs/product-specs/<slug>.md` |
+| `plan`, `plan:` | `$harness-exec-plan` | `docs/exec-plans/active/<slug>.md` |
+| `build`, `build:` | `$harness-exec-build` | active ExecPlan의 다음 미완료 항목 |
+| `test`, `test:` | `$agent-skills-test` | TDD와 검증 workflow |
+| `review`, `review:` | `$agent-skills-review` | 5축 코드 리뷰 |
+| `code-simplify`, `code-simplify:` | `$agent-skills-code-simplify` | 동작 보존 단순화 |
+| `ship`, `ship:` | `$agent-skills-ship` | 출시 go/no-go 검토 |
+
+`spec`, `plan`, `build` workflow는 루트 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`를 만들지 않는다.
+
+## 적용 방법
+
+1. 이 디렉터리의 내용을 대상 프로젝트 루트에 복사한다.
+2. `AGENTS.md`, `ARCHITECTURE.md`, `docs/README.md`, `docs/validation.md`의 자리표시자를 대상 프로젝트에 맞게 채운다.
+3. 필요한 첫 요구사항을 `spec:`으로 정리하고, 이어서 `plan:`, `build` 순서로 진행한다.
+4. 적용 뒤 아래 검증을 실행한다.
+
+## 빠른 검증
+
+```bash
+python3 - <<'PY'
+import json
+import tomllib
+from pathlib import Path
+
+root = Path.cwd()
+json.loads((root / ".codex/hooks.json").read_text())
+tomllib.loads((root / ".codex/config.toml").read_text())
+for path in sorted((root / ".codex/agents").glob("*.toml")):
+    data = tomllib.loads(path.read_text())
+    assert data["name"] == path.stem
+    assert data["description"]
+    assert data["developer_instructions"]
+print("config ok")
+PY
+```
+
+```bash
+python3 .codex/hooks/user_prompt_submit.py <<'JSON'
+{
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "spec 새 기능 요구사항을 정리해줘"
+}
+JSON
+```
+
+예상 결과: 출력 JSON의 `additionalContext`에 `$harness-product-spec`와 `docs/product-specs/` 안내가 포함된다.

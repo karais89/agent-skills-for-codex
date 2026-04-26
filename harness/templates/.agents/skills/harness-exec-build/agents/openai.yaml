@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Exec Build"
+  short_description: "Implement active execution plan items"
+  default_prompt: "build"
