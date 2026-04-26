@@ -48,25 +48,33 @@ python3 harness/scripts/build-template.py --check
 
 ## 적용 방식
 
-현재 적용 방식은 명령 기반 복제다. 새 대상 프로젝트에 full 템플릿을 만들 때는 비어 있거나 아직 존재하지 않는 대상 디렉터리에 source를 생성한다.
+현재 적용 방식은 `$harness-apply` 스킬과 `harness/scripts/apply-template.py`를 기준으로 한다. 새 대상 프로젝트나 기존 프로젝트에 적용하기 전에는 dry-run으로 충돌을 먼저 확인한다.
 
 ```bash
-python3 harness/scripts/build-template.py --generate /path/to/target-project
+python3 harness/scripts/apply-template.py --target /path/to/target-project --dry-run
 ```
 
-이미 존재하는 프로젝트 루트에 적용해야 하는 경우에는 충돌 파일을 먼저 검토한 뒤 `harness/templates/.` 내용을 대상 루트에 복사한다.
+충돌이 없으면 실제 적용을 실행한다.
 
 ```bash
-cp -R harness/templates/. /path/to/existing-project/
+python3 harness/scripts/apply-template.py --target /path/to/target-project
 ```
 
-이 직접 복사 방식은 현재 full 모델의 배포 형태로 허용한다. 다만 충돌 해결, 기존 파일 병합, 백업, dry-run은 아직 자동화하지 않는다. 그런 기능은 후속 `$harness-apply` 스킬이나 적용 스크립트의 범위로 남긴다.
+동작 기준:
+
+- 대상 디렉터리가 없으면 생성한다.
+- 대상 디렉터리가 있으면 템플릿 파일과 기존 파일을 먼저 비교한다.
+- 기존 파일이 템플릿 파일과 byte-level로 같으면 충돌로 보지 않는다.
+- 기존 파일이 다르거나 파일/디렉터리 타입이 맞지 않으면 충돌로 보고 적용하지 않는다.
+- 충돌이 없을 때만 누락 파일을 복사한다.
+
+자동 병합, 백업, 강제 덮어쓰기는 지원하지 않는다. 충돌이 있는 기존 프로젝트는 충돌 경로를 사람이 검토한 뒤 별도 작업으로 정리한다.
 
 ## 관리 결정
 
 - `harness/source/full/root/`와 `harness/templates/`는 byte-level로 일치해야 한다.
 - `harness/templates/`는 커밋하지만 사람이 직접 관리하는 원본으로 취급하지 않는다.
-- `$harness-apply` 스킬은 지금 만들지 않는다. 현재는 `build-template.py --generate`와 직접 복사 절차로 충분히 검증한다.
+- `$harness-apply` 스킬은 이 저장소의 repo-local 적용 도구이며, 대상 프로젝트 템플릿에는 번들하지 않는다.
 - `harness/templates/README.md`는 대상 프로젝트에 복제될 README이므로 템플릿 배포자용 절차를 담지 않는다. 배포자용 절차는 이 문서에 둔다.
 
 ## 검증

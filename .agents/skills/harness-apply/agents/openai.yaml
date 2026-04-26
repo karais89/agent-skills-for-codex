@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Apply"
+  short_description: "Apply the full harness template to a target project."
+  default_prompt: "Apply the full harness template to a target project and verify the result."
