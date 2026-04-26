@@ -11,7 +11,7 @@
 ## 하네스 산출물
 
 - [하네스 산출물 기준](../harness/README.md)
-- [하네스 템플릿 README](../harness/templates/README.md)
+- [full 하네스 템플릿 산출물 README](../harness/templates/README.md)
 
 ## 참고 문서
 
