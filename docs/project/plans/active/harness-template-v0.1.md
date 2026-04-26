@@ -17,11 +17,14 @@
 
 v0.1은 다른 프로젝트에 복사 가능한 최소 문서 하네스 템플릿을 만든다. 대상 프로젝트가 코드베이스 구조, 작업 계획, 검증 기준, 에이전트 작업 지침을 한곳에서 파악할 수 있도록 문서 뼈대를 제공한다.
 
+`harness/templates/` 아래의 하위 구조는 대상 프로젝트 루트 기준 경로를 그대로 미러링한다. 예를 들어 `harness/templates/AGENTS.md`는 대상 프로젝트의 `AGENTS.md`가 되고, `harness/templates/docs/exec-plans/template.md`는 대상 프로젝트의 `docs/exec-plans/template.md`가 된다.
+
 v0.1에서 다루는 범위는 다음과 같다.
 
 - 프로젝트 루트용 `AGENTS.md` 템플릿 작성
-- 프로젝트 문서 진입점과 구조 설명 템플릿 작성
-- 장시간 작업과 큰 변경을 위한 실행 계획 템플릿 작성
+- 프로젝트 루트용 `ARCHITECTURE.md` 템플릿 작성
+- 프로젝트 문서 진입점 템플릿 작성
+- 장시간 작업과 큰 변경을 위한 `docs/exec-plans/` 구조와 실행 계획 템플릿 작성
 - 검증 기준을 기록하는 문서 템플릿 작성
 - 템플릿 문서 간 링크와 공통 용어 정리
 - v0.1 완료 기준과 검증 절차 정리
@@ -30,9 +33,12 @@ v0.1에서 다루는 범위는 다음과 같다.
 
 - [ ] 기존 내부 문서에서 템플릿으로 승격할 규칙과 제외할 규칙을 선별한다.
 - [ ] `harness/templates/AGENTS.md` 초안을 작성한다.
+- [ ] `harness/templates/ARCHITECTURE.md` 초안을 작성한다.
 - [ ] `harness/templates/docs/README.md` 초안을 작성한다.
-- [ ] `harness/templates/docs/project-map.md` 초안을 작성한다.
-- [ ] `harness/templates/docs/plans/exec-plan.md` 초안을 작성한다.
+- [ ] `harness/templates/docs/exec-plans/README.md` 초안을 작성한다.
+- [ ] `harness/templates/docs/exec-plans/template.md` 초안을 작성한다.
+- [ ] `harness/templates/docs/exec-plans/active/`를 Git에 보존할 자리표시자나 안내 파일을 작성한다.
+- [ ] `harness/templates/docs/exec-plans/completed/`를 Git에 보존할 자리표시자나 안내 파일을 작성한다.
 - [ ] `harness/templates/docs/validation.md` 초안을 작성한다.
 - [ ] 각 템플릿에 적용 대상, 필수 입력, 기대 결과, 검증 방법을 반영한다.
 - [ ] 문서 간 상대 링크가 실제 경로와 맞는지 확인한다.
@@ -45,9 +51,12 @@ v0.1에서 다루는 범위는 다음과 같다.
 ## v0.1 산출물 목록
 
 - `harness/templates/AGENTS.md`
+- `harness/templates/ARCHITECTURE.md`
 - `harness/templates/docs/README.md`
-- `harness/templates/docs/project-map.md`
-- `harness/templates/docs/plans/exec-plan.md`
+- `harness/templates/docs/exec-plans/README.md`
+- `harness/templates/docs/exec-plans/template.md`
+- `harness/templates/docs/exec-plans/active/`
+- `harness/templates/docs/exec-plans/completed/`
 - `harness/templates/docs/validation.md`
 
 ## 제외 항목
@@ -60,6 +69,8 @@ v0.1에서 다루는 범위는 다음과 같다.
 - 실행 계획 작성, 검증 결과 해석, 템플릿 적용을 위한 스킬 작성
 - phase/step 실행기나 큰 자동화 구조 설계
 - UI 프로젝트 전용 브라우저 검증 기준 작성
+- `docs/design-docs/`, `docs/product-specs/`, `docs/generated/`, `docs/references/` 같은 확장 문서 영역 작성
+- `docs/DESIGN.md`, `docs/FRONTEND.md`, `docs/QUALITY_SCORE.md`, `docs/RELIABILITY.md`, `docs/SECURITY.md` 같은 주제별 심화 문서 작성
 - 내부 운영 문서 전체 리팩터링
 
 ## 검증 기준
@@ -67,12 +78,14 @@ v0.1에서 다루는 범위는 다음과 같다.
 v0.1 템플릿 구현이 끝나면 다음 기준으로 확인한다.
 
 - `git diff --check`가 통과한다.
-- v0.1 산출물 목록의 모든 파일이 존재한다.
+- v0.1 산출물 목록의 모든 파일과 디렉터리가 존재한다.
+- `docs/exec-plans/active/`와 `docs/exec-plans/completed/`가 템플릿 적용 후 보존될 수 있는 방식으로 정리되어 있다.
 - 각 템플릿 문서의 상대 링크가 실제 경로와 맞는다.
 - `AGENTS.md` 템플릿이 대상 프로젝트의 짧은 진입점 역할에 집중한다.
+- `ARCHITECTURE.md` 템플릿이 대상 프로젝트의 구조와 주요 설계 결정을 설명하게 한다.
 - `docs/README.md` 템플릿이 대상 프로젝트 문서 구조를 안내한다.
-- `docs/project-map.md` 템플릿이 코드와 문서 위치를 빠르게 찾게 한다.
-- `docs/plans/exec-plan.md` 템플릿이 큰 작업의 목표, 범위, 체크리스트, 검증, 완료 조건을 기록하게 한다.
+- `docs/exec-plans/README.md` 템플릿이 실행 계획의 `active/`, `completed/`, `template.md` 사용 방식을 안내한다.
+- `docs/exec-plans/template.md` 템플릿이 큰 작업의 목표, 범위, 체크리스트, 검증, 완료 조건을 기록하게 한다.
 - `docs/validation.md` 템플릿이 테스트, 수동 확인, 남은 위험을 기록하게 한다.
 - v0.1 제외 항목이 실제 산출물에 구현 범위처럼 섞이지 않는다.
 
@@ -81,7 +94,7 @@ v0.1 템플릿 구현이 끝나면 다음 기준으로 확인한다.
 다음 조건을 모두 만족하면 v0.1을 완료로 본다.
 
 - v0.1 진행 체크리스트의 모든 항목이 완료되어 있다.
-- v0.1 산출물 목록의 파일이 모두 작성되어 있다.
+- v0.1 산출물 목록의 파일과 디렉터리가 모두 작성되어 있다.
 - 검증 기준을 실행하고 결과를 완료 회고에 기록했다.
 - 변경 범위에 v0.1과 무관한 문서, 코드, 설정 변경이 없다.
 - `harness/templates/README.md`가 새 템플릿 목록을 반영한다.
