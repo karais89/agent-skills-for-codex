@@ -8,3 +8,4 @@
 - [OpenAI Harness Engineering 참고](references/openai-harness-engineering.md)
 - [OpenAI Codex 실행 계획 참고](references/openai-codex-exec-plans.md)
 - [Anthropic 장시간 앱 개발 하네스 설계 참고](references/anthropic-harness-design-long-running-apps.md)
+- [다운로드한 참고 저장소 분석](references/downloaded-repositories-analysis.md)
