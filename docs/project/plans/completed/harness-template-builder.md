@@ -29,7 +29,7 @@
 - 다른 프로젝트에 실제 적용하는 `$harness-apply` 스킬 작성.
 - minimal 배포 모델 설계.
 - 템플릿 내용 자체의 큰 재설계.
-- 브라우저 기반 `codex exec build` smoke 재실행.
+- 전체 기능 구현 완료까지의 반복 `codex exec build` smoke.
 
 ## 진행 체크리스트
 
@@ -75,3 +75,18 @@
 | 2026-04-26 | validate | `python3 harness/scripts/validate-template.py` | 통과: 설정 파싱, skill frontmatter, hook, forbidden path, drift 확인 |
 | 2026-04-26 | 신규 스킬 검증 | `quick_validate.py .agents/skills/harness-template-build`, `quick_validate.py .agents/skills/harness-template-validate` | 둘 다 통과 |
 | 2026-04-26 | 공백 검사 | `git diff --check` | 통과 |
+| 2026-04-26 | 후속 실제 시뮬레이션 fixture 생성 | `python3 harness/scripts/build-template.py --generate /tmp/harness-builder-sim.4V1uWb/project` | 통과: full source에서 테스트 프로젝트 생성 |
+| 2026-04-26 | 후속 실제 시뮬레이션 정적 확인 | fixture 안에서 `.codex/config.toml`, `.codex/agents/*.toml`, `.codex/hooks.json`, skill frontmatter, alias hook, forbidden path 확인 | 통과: `spec`, `plan`, `build`가 새 harness skill로 라우팅되고 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`, `docs/references` 없음 |
+| 2026-04-26 | 후속 실제 시뮬레이션 spec | fixture에서 `codex exec --skip-git-repo-check --sandbox workspace-write "spec: 간단한 북마크 목록 기능 요구사항을 작성해줘..."` | 통과: `docs/product-specs/bookmark-list.md` 생성, product spec index 갱신, legacy 산출물 없음 |
+| 2026-04-26 | 후속 실제 시뮬레이션 plan | fixture에서 `codex exec --skip-git-repo-check --sandbox workspace-write "plan: 방금 작성한 북마크 목록 product spec을 구현 가능한 실행 계획으로 나눠줘."` | 통과: `docs/exec-plans/active/bookmark-list.md` 생성, 첫 구현 단위를 포함한 5개 체크리스트 작성, legacy 산출물 없음 |
+| 2026-04-26 | 후속 실제 시뮬레이션 build | fixture에서 `codex exec --skip-git-repo-check --sandbox workspace-write "build"` | 부분 통과: active ExecPlan의 첫 체크박스를 구현하고 `npm test`, `npm run check` 통과. sandbox socket 제한으로 로컬 서버 browser smoke는 `PermissionError`/`listen EPERM`으로 실행 불가하며 ExecPlan에 기록됨 |
+| 2026-04-26 | 후속 실제 시뮬레이션 재확인 | fixture에서 `npm test`, `npm run check`, forbidden path 검색, 원 저장소에서 `python3 harness/scripts/build-template.py --check`, `python3 harness/scripts/validate-template.py` | 통과: fixture 자동 검증과 템플릿 drift/validation 모두 통과 |
+
+## 후속 실제 시뮬레이션 결과
+
+- `/tmp/harness-builder-sim.4V1uWb/project`에 full 템플릿을 적용해 실제 target 프로젝트 형태를 만들었다.
+- `spec` alias는 `$harness-product-spec`로 라우팅되어 `docs/product-specs/bookmark-list.md`를 만들고 루트 `SPEC.md`를 만들지 않았다.
+- `plan` alias는 `$harness-exec-plan`로 라우팅되어 `docs/exec-plans/active/bookmark-list.md`를 만들고 `tasks/plan.md`, `tasks/todo.md`를 만들지 않았다.
+- `build` alias는 `$harness-exec-build`로 라우팅되어 active ExecPlan의 첫 미완료 항목만 구현하고, 같은 ExecPlan에 검증 기록과 sandbox 제한을 남긴 뒤 체크박스를 완료 처리했다.
+- 시뮬레이션 후 fixture에는 `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`, `docs/references`가 없었다.
+- 현재 실행 환경은 로컬 socket bind를 막아 `python3 -m http.server`와 Node `listen(...)` 기반 browser smoke가 실패한다. 이 제한은 템플릿 문제가 아니라 실행 sandbox 제약으로 판단하고, 실제 사용자 로컬 환경에서 재시도할 항목으로 남긴다.
