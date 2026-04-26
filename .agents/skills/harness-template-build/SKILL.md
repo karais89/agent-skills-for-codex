@@ -24,8 +24,9 @@ The distribution model is full. Do not introduce a minimal variant in this workf
 3. If the user asks to change template content, edit the source tree first.
 4. Run `python3 harness/scripts/build-template.py --check` to compare source-generated output with `harness/templates/`.
 5. If source and output differ because the source changed intentionally, run `python3 harness/scripts/build-template.py --write` to regenerate `harness/templates/`.
-6. Run `python3 harness/scripts/validate-template.py`.
-7. Report whether source and output match, what changed, and which validation commands passed.
+6. If `harness/scripts/build-template.py` changed, run `python3 harness/scripts/test-template-builder.py`.
+7. Run `python3 harness/scripts/validate-template.py`.
+8. Report whether source and output match, what changed, and which validation commands passed.
 
 ## Rules
 

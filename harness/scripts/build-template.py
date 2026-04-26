@@ -16,6 +16,13 @@ DEFAULT_SOURCE = REPO_ROOT / "harness/source/full/root"
 DEFAULT_OUTPUT = REPO_ROOT / "harness/templates"
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
 def relative_files(root: Path) -> dict[Path, Path]:
     files: dict[Path, Path] = {}
     for path in sorted(root.rglob("*")):
@@ -74,7 +81,7 @@ def check(source: Path, output: Path) -> int:
         for problem in problems:
             print(f"- {problem}", file=sys.stderr)
         return 1
-    print(f"template ok: {source.relative_to(REPO_ROOT)} matches {output.relative_to(REPO_ROOT)}")
+    print(f"template ok: {display_path(source)} matches {display_path(output)}")
     return 0
 
 
@@ -90,7 +97,7 @@ def write(source: Path, output: Path) -> int:
     if output.exists():
         shutil.rmtree(output)
     shutil.copytree(source, output, symlinks=True, copy_function=shutil.copy2)
-    print(f"wrote template output: {output.relative_to(REPO_ROOT)}")
+    print(f"wrote template output: {display_path(output)}")
     return 0
 
 
