@@ -46,6 +46,33 @@ source와 output이 같은지 확인할 때는 다음 명령을 사용한다.
 python3 harness/scripts/build-template.py --check
 ```
 
+## 릴리즈 가능 판정
+
+하네스 템플릿 릴리즈는 `harness/templates/`를 다른 프로젝트에 적용해도 되는 상태로 고정하는 것을 뜻한다. 릴리즈 가능 여부는 source와 output의 일치, 적용 안전성, 실제 사용 흐름 검증을 기준으로 판단한다.
+
+릴리즈 후보는 다음 조건을 모두 만족해야 한다.
+
+- `harness/source/full/root/`가 의도한 템플릿 원본이다.
+- `harness/templates/`는 원본에서 재생성된 산출물이며 직접 편집 흔적이 없다.
+- `harness/source/full/manifest.toml`의 배포 모델은 `full`이다.
+- `harness/templates/`에는 root `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`, `docs/references`가 없다.
+- `apply-template.py --dry-run`이 충돌을 먼저 보고하고, 충돌이 있으면 부분 복사 없이 실패한다.
+- 새 fixture 적용에서 `AGENTS.md`, `.agents/skills/`, `.codex/`, `docs/product-specs/`, `docs/exec-plans/`가 생성된다.
+- 적어도 하나의 clean Git fixture에서 `spec -> plan -> build` 흐름이 확인되어 있다.
+- UI 또는 브라우저 동작을 포함한 변경이면 sandbox 밖 로컬 브라우저 smoke 또는 동등한 수동 검증 결과를 남긴다.
+
+릴리즈 전 기본 검증 명령은 다음과 같다.
+
+```bash
+python3 harness/scripts/build-template.py --check
+python3 harness/scripts/validate-template.py
+python3 harness/scripts/test-template-builder.py
+python3 harness/scripts/test-apply-template.py
+git diff --check
+```
+
+템플릿 문서, hook, skill, 적용 스크립트처럼 실제 사용 흐름에 영향을 주는 변경은 추가로 fixture 적용과 `codex exec` smoke 결과를 남긴다.
+
 ## 적용 방식
 
 현재 적용 방식은 `$harness-apply` 스킬과 `harness/scripts/apply-template.py`를 기준으로 한다. 새 대상 프로젝트나 기존 프로젝트에 적용하기 전에는 dry-run으로 충돌을 먼저 확인한다.
@@ -76,6 +103,28 @@ python3 harness/scripts/apply-template.py --target /path/to/target-project
 - `harness/templates/`는 커밋하지만 사람이 직접 관리하는 원본으로 취급하지 않는다.
 - `$harness-apply` 스킬은 이 저장소의 repo-local 적용 도구이며, 대상 프로젝트 템플릿에는 번들하지 않는다.
 - `harness/templates/README.md`는 대상 프로젝트에 복제될 README이므로 템플릿 배포자용 절차를 담지 않는다. 배포자용 절차는 이 문서에 둔다.
+
+## 기존 프로젝트 업그레이드
+
+이미 하네스가 적용된 프로젝트에 새 템플릿을 다시 적용할 때도 기본 절차는 동일하다.
+
+1. 대상 프로젝트의 Git 상태를 먼저 확인한다.
+2. `apply-template.py --dry-run`으로 변경 예정 파일과 충돌을 확인한다.
+3. 충돌이 없을 때만 실제 적용을 실행한다.
+4. 충돌이 있으면 자동 덮어쓰기나 자동 병합을 하지 않는다.
+5. 사람이 기존 프로젝트 문서와 새 템플릿 문서를 비교해 필요한 항목만 수동으로 반영한다.
+
+full 모델은 `README.md`, `AGENTS.md`, `ARCHITECTURE.md`, `docs/`를 포함하므로 이미 문서 체계가 있는 프로젝트에서는 충돌이 정상적인 결과일 수 있다. 이 경우 릴리즈 실패가 아니라 수동 병합이 필요한 적용 사례로 기록한다.
+
+## 변경 기록 기준
+
+릴리즈 노트나 완료 문서에는 변경 유형을 구분해서 적는다.
+
+- 템플릿 문서 변경: `README.md`, `ARCHITECTURE.md`, `docs/*` 같은 대상 프로젝트 문서가 바뀐 경우.
+- 스킬 변경: `.agents/skills/*`의 workflow, alias 계약, 검증 기준이 바뀐 경우.
+- hook 또는 config 변경: `.codex/*`의 라우팅, 안전 정책, agent 설정이 바뀐 경우.
+- 적용 도구 변경: `harness/scripts/apply-template.py`나 관련 테스트가 바뀐 경우.
+- 검증 정책 변경: 릴리즈 전 필수 명령, fixture smoke, 브라우저 smoke 기준이 바뀐 경우.
 
 ## 검증
 
