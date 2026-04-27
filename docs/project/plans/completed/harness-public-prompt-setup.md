@@ -75,9 +75,58 @@
 - 사용자가 이름이나 목적을 나중에 정하는 경우를 위해 `harness/prompts/update-project-profile.md`를 추가했다.
 - 프로젝트 프로필 갱신 절차는 `README.md`, `ARCHITECTURE.md`, `AGENTS.md`, `docs/validation.md`를 갱신하고 config parsing, alias routing, forbidden path 확인을 수행한다.
 
+## LLM end-to-end 검증
+
+2026-04-27에 public prompt만 사용해 `codex exec` 기반 end-to-end 검증을 실행했다.
+
+대상:
+
+- fixture: `/tmp/harness-llm-e2e.6xi4aA`
+- 프로젝트 이름: `Harness LLM E2E`
+- 프로젝트 목적: public setup prompt가 새 프로젝트를 끝까지 초기화하는지 검증하는 fixture
+
+검증 절차:
+
+| 단계 | 실행 | 결과 |
+| --- | --- | --- |
+| 1 | `codex exec --skip-git-repo-check --cd /tmp/harness-llm-e2e.6xi4aA --sandbox workspace-write "<new-project prompt URL을 읽고 따라 해줘>"` | 통과: 파일 적용 없이 대상 경로, 프로젝트 이름, 프로젝트 목적 확인 질문에서 멈춤. |
+| 2 | 같은 target에서 진행 승인과 프로젝트 이름/목적을 포함해 `codex exec --skip-git-repo-check --sandbox danger-full-access ...` 실행 | 통과: public prompt와 INSTALL을 읽고 public repo clone, dry-run, apply, 문서 초기화, 검증, Git 커밋까지 완료. |
+| 3 | target 재검증 | 통과: config parsing, skill frontmatter, `spec`/`plan`/`build` alias routing, forbidden path 확인. |
+
+결과:
+
+- target 커밋: `ea0f1d3 Initial harness project setup`
+- target Git 상태: clean
+- root `SPEC.md`, `tasks/`, `docs/references` 미생성 확인
+- 문서 초기화 대상: `README.md`, `ARCHITECTURE.md`, `AGENTS.md`, `docs/validation.md`
+
+관찰:
+
+- 첫 `workspace-write` 실행에서는 `raw.githubusercontent.com` DNS resolution이 실패했지만, Codex가 GitHub connector로 prompt와 INSTALL을 읽어 확인 질문까지 도달했다.
+- 승인된 실행에서는 `--sandbox danger-full-access`를 사용했을 때 `curl`과 `git clone`으로 public URL 접근이 가능했다.
+- `codex exec` 종료 시 rollout 기록 관련 경고가 출력됐지만, target 파일, 검증, 커밋 결과에는 영향이 없었다.
+
+## public README 사용성 점검
+
+2026-04-27에 public raw 문서 기준으로 README와 설치 문서를 점검했다.
+
+확인한 파일:
+
+- `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/README.md`
+- `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/docs/installation.md`
+- `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md`
+
+확인 결과:
+
+- README 첫 화면에서 이 저장소가 앱 생성기가 아니라 repo-local Codex 하네스 템플릿임을 설명한다.
+- README에 바로 복사할 수 있는 새 프로젝트 생성 프롬프트가 있다.
+- README에서 `spec -> plan -> build` 기본 workflow와 forbidden legacy 산출물을 설명한다.
+- `docs/installation.md`에 새 프로젝트 생성, 기존 프로젝트 적용, 프로젝트 프로필 갱신, 직접 적용, 적용 후 검증 절차가 있다.
+- `harness/INSTALL.md`에 apply-template dry-run, 실제 적용, 문서 초기화, 검증, 완료 보고 기준이 있다.
+- public 문서 체크리스트 스크립트가 통과했다.
+
 ## 남은 한계
 
-- 이번 검증은 사람이 INSTALL 절차를 따라 수행한 smoke다. 별도 `codex exec`가 public prompt를 읽고 끝까지 수행하는 end-to-end 자동 검증은 아직 아니다.
 - 기존 프로젝트 충돌 병합은 이번 범위가 아니다. 기존 프로젝트는 dry-run 충돌 보고까지만 prompt에 명시했다.
 - 문서 초기화는 아직 스크립트가 아니라 LLM 지침 기반이다. 이 선택은 초경량 하네스 목적에 맞추기 위한 것이다.
 
@@ -90,4 +139,6 @@
 - [x] public clone 기반으로 새 프로젝트 target에 템플릿 적용이 성공했다.
 - [x] target 문서가 프로젝트 목적에 맞게 초기화되었다.
 - [x] target 하네스 설정과 alias routing 검증이 통과했다.
+- [x] public prompt를 사용한 `codex exec` end-to-end 검증이 통과했다.
+- [x] public README와 설치 문서 사용성 점검이 통과했다.
 - [x] 결과가 문서화되었다.
