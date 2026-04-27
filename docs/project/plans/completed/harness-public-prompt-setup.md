@@ -10,6 +10,7 @@
 - raw install guide: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md`
 - 새 프로젝트 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/new-project.md`
 - 기존 프로젝트 적용 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/apply-to-existing-project.md`
+- 프로젝트 프로필 갱신 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/update-project-profile.md`
 
 ## 결정
 
@@ -65,6 +66,14 @@
 - UX smoke target에서 config parsing 통과.
 - UX smoke target에서 `spec`, `plan`, `build` alias routing 통과.
 - UX smoke target에서 root `SPEC.md`, `tasks/`, `docs/references` 미생성 확인.
+
+2026-04-27에 새 프로젝트 생성 전에는 기본값을 조용히 적용하지 않고, 대상 경로/프로젝트 이름/프로젝트 목적을 한 번 확인하도록 바꿨다.
+
+- 대상 경로는 현재 작업 디렉터리를 "제안"하되 사용자 확인 전에는 파일을 적용하지 않는다.
+- 프로젝트 이름은 대상 디렉터리 이름을 "제안"한다.
+- 프로젝트 목적은 사용자가 정하지 않았으면 "아직 정하지 않음"을 제안한다.
+- 사용자가 이름이나 목적을 나중에 정하는 경우를 위해 `harness/prompts/update-project-profile.md`를 추가했다.
+- 프로젝트 프로필 갱신 절차는 `README.md`, `ARCHITECTURE.md`, `AGENTS.md`, `docs/validation.md`를 갱신하고 config parsing, alias routing, forbidden path 확인을 수행한다.
 
 ## 남은 한계
 
