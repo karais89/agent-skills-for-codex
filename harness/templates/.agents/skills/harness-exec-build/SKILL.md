@@ -20,7 +20,7 @@ Bare `/build` is not supported by the Codex TUI; it is rejected before hooks run
 7. Run the focused verification from the ExecPlan, then broader verification when the change has shared or user-facing impact.
 8. Update the same ExecPlan with:
    - the completed checkbox only after verification passes or the user explicitly accepts a documented limitation
-   - commands run and results
+   - one completion record row with date, item, changed files or behavior, verification, result, and remaining risk
    - findings discovered during implementation
    - decisions that changed the plan
 9. If all checklist items are complete, add a completion retrospective and ask the user before moving the file to `docs/exec-plans/completed/`.

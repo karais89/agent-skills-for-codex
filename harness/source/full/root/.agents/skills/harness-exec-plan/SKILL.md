@@ -17,8 +17,9 @@ Bare `/plan` is not supported by the Codex TUI; it is rejected before hooks run 
 4. Stay in planning mode. Do not make product code changes.
 5. Choose a concise lowercase hyphen-case slug. Update an existing active ExecPlan for the same goal; otherwise create `docs/exec-plans/active/<slug>.md`.
 6. Write checklist items that one `build` invocation can finish and verify.
-7. Include acceptance criteria and verification steps for every meaningful item.
-8. Report the active ExecPlan path and any decisions or open questions.
+7. For each checklist item, include only these lightweight fields: files to read, change scope, verification, and completion record.
+8. Include acceptance criteria and verification steps for every meaningful item.
+9. Report the active ExecPlan path and any decisions or open questions.
 
 ## Required ExecPlan Sections
 
@@ -38,5 +39,6 @@ Bare `/plan` is not supported by the Codex TUI; it is rejected before hooks run 
 
 - Make the plan actionable without being a full implementation transcript.
 - Keep every checklist item small enough for one focused build/test loop.
+- Keep checklist item details short: `읽을 파일`, `변경 범위`, `검증`, `완료 기록`.
 - Record assumptions and decisions where future builders will need them.
 - Never create or update root `SPEC.md`, `tasks/plan.md`, or `tasks/todo.md` for this workflow.
