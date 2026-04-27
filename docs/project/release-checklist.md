@@ -36,6 +36,7 @@
 ```bash
 python3 harness/scripts/build-template.py --check
 python3 harness/scripts/validate-template.py
+python3 harness/scripts/test-validate-template.py
 python3 harness/scripts/test-template-builder.py
 python3 harness/scripts/test-apply-template.py
 git diff --check

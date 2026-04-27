@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 SOURCE_ROOT = REPO_ROOT / "harness/source/full/root"
 OUTPUT_ROOT = REPO_ROOT / "harness/templates"
 BUILD_SCRIPT = REPO_ROOT / "harness/scripts/build-template.py"
+AGENTS_ENTRYPOINT_MAX_LINES = 200
 FORBIDDEN_PATHS = [
     "SPEC.md",
     "tasks/plan.md",
@@ -80,6 +81,18 @@ def validate_no_reference_links(root: Path) -> None:
                 fail(f"forbidden reference link {needle!r} in {path.relative_to(root)}")
 
 
+def validate_agents_entrypoint_size(root: Path) -> None:
+    path = root / "AGENTS.md"
+    if not path.is_file():
+        fail(f"template entrypoint missing: {path.relative_to(root)}")
+    line_count = len(path.read_text().splitlines())
+    if line_count > AGENTS_ENTRYPOINT_MAX_LINES:
+        fail(
+            f"AGENTS.md has {line_count} lines; keep it at or below "
+            f"{AGENTS_ENTRYPOINT_MAX_LINES} lines and move details into docs/"
+        )
+
+
 def run_hook_checks(root: Path) -> None:
     user_hook = root / ".codex/hooks/user_prompt_submit.py"
     checks = [
@@ -117,6 +130,7 @@ def validate_tree(root: Path) -> int:
     skill_count = validate_skill_frontmatter(root)
     validate_forbidden_paths(root)
     validate_no_reference_links(root)
+    validate_agents_entrypoint_size(root)
     run_hook_checks(root)
     return skill_count
 
