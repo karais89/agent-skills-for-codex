@@ -47,6 +47,25 @@
 - 하네스 설정과 alias routing은 public clone으로 만든 target에서도 정상 동작한다.
 - legacy/reference 경로는 생성되지 않는다.
 
+## UX 보완 기록
+
+2026-04-27에 사용자-facing prompt에서 `<target-path>`, `<project-name>`, `<one-line-brief>` 같은 placeholder 입력 방식을 제거했다.
+
+- 대상 경로 기본값은 현재 작업 디렉터리로 정했다.
+- 프로젝트 이름 기본값은 대상 디렉터리 이름으로 정했다.
+- 프로젝트 목적을 받지 못하면 꾸며 쓰지 않고 "아직 정하지 않음"으로 문서화하도록 했다.
+- 현재 작업 디렉터리가 하네스 소스 저장소이거나 비어 있지 않아 위험한 경우에만 에이전트가 짧게 질문하도록 했다.
+- `/tmp/harness-ux-smoke.rEM3xg`에서 값 없는 새 프로젝트 setup 흐름을 수동 smoke로 확인했다.
+
+검증:
+
+- `rg`로 prompt와 INSTALL의 사용자 입력 placeholder 제거 확인.
+- `python3 harness/scripts/build-template.py --check` 통과.
+- `python3 harness/scripts/validate-template.py` 통과.
+- UX smoke target에서 config parsing 통과.
+- UX smoke target에서 `spec`, `plan`, `build` alias routing 통과.
+- UX smoke target에서 root `SPEC.md`, `tasks/`, `docs/references` 미생성 확인.
+
 ## 남은 한계
 
 - 이번 검증은 사람이 INSTALL 절차를 따라 수행한 smoke다. 별도 `codex exec`가 public prompt를 읽고 끝까지 수행하는 end-to-end 자동 검증은 아직 아니다.

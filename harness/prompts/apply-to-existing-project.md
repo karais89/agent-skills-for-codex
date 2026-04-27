@@ -1,16 +1,18 @@
 # 기존 프로젝트 적용 프롬프트
 
-아래 프롬프트를 Codex, Antigravity, Claude Code 같은 LLM 코딩 에이전트에게 그대로 전달한다. `<...>` 값만 실제 값으로 바꾼다.
+아래 프롬프트를 Codex, Antigravity, Claude Code 같은 LLM 코딩 에이전트에게 그대로 전달한다. 값을 미리 채울 필요는 없다. 에이전트가 현재 폴더를 기본 대상으로 삼고, 필요한 경우에만 질문한다.
 
 ```text
 https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
 
 작업 유형: 기존 프로젝트에 하네스 적용
-대상 경로: <target-project-path>
-프로젝트 이름: <project-name>
-프로젝트 목적: <one-line-brief>
 
 요구사항:
+- 대상 경로를 따로 말하지 않았으면 현재 작업 디렉터리를 기본값으로 사용해.
+- 프로젝트 이름을 따로 말하지 않았으면 기존 README 제목, package.json name, Git repo 이름, 디렉터리 이름 순서로 추론해.
+- 프로젝트 목적을 따로 말하지 않았으면 기존 README와 코드 구조에서 추론해. 근거가 부족하면 "확인 필요"로 남겨.
+- README.md, AGENTS.md, ARCHITECTURE.md, docs/ 충돌이 있으면 덮어쓰지 말고 중단해.
+- 정말 필요한 경우에만 짧게 질문해. 질문은 한 번에 1-3개까지만 해.
 - 필요한 경우 https://github.com/karais89/agent-skills-for-codex 저장소를 임시 위치에 클론해서 사용해.
 - 먼저 대상 프로젝트의 Git 상태와 기존 README.md, AGENTS.md, ARCHITECTURE.md, docs/ 존재 여부를 확인해.
 - harness/templates를 직접 수동 복사하지 말고, INSTALL.md에 적힌 apply-template.py dry-run을 먼저 실행해.
