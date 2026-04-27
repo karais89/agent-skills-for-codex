@@ -3,7 +3,7 @@
 아래 프롬프트를 Codex, Antigravity, Claude Code 같은 LLM 코딩 에이전트에게 그대로 전달한다. 값을 미리 채울 필요는 없다. 에이전트가 현재 폴더를 기본 대상으로 제안하되, 적용 전에는 대상과 충돌 가능성을 한 번 확인한다.
 
 ```text
-https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
+https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
 
 작업 유형: 기존 프로젝트에 하네스 적용
 

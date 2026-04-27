@@ -7,10 +7,10 @@
 ## public 저장소
 
 - repository: `https://github.com/karais89/agent-skills-for-codex`
-- raw install guide: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md`
-- 새 프로젝트 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/new-project.md`
-- 기존 프로젝트 적용 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/apply-to-existing-project.md`
-- 프로젝트 프로필 갱신 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/prompts/update-project-profile.md`
+- raw install guide: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md`
+- 새 프로젝트 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/prompts/new-project.md`
+- 기존 프로젝트 적용 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/prompts/apply-to-existing-project.md`
+- 프로젝트 프로필 갱신 프롬프트: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/prompts/update-project-profile.md`
 
 ## 결정
 

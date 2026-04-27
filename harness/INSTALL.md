@@ -5,7 +5,7 @@
 ## Source
 
 - public repository: `https://github.com/karais89/agent-skills-for-codex`
-- raw install guide: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md`
+- raw install guide: `https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md`
 - default template source: `harness/templates/`
 - apply script: `harness/scripts/apply-template.py`
 

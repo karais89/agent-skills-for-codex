@@ -3,7 +3,7 @@
 아래 프롬프트를 Codex, Antigravity, Claude Code 같은 LLM 코딩 에이전트에게 그대로 전달한다. 값을 미리 채울 필요는 없다. 에이전트가 대상 경로, 프로젝트 이름, 프로젝트 목적의 기본값을 제안하고 적용 전에 한 번 확인한다.
 
 ```text
-https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
+https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
 
 작업 유형: 새 프로젝트 생성
 
@@ -27,7 +27,7 @@ https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/I
 ## 값을 함께 주는 예시
 
 ```text
-https://raw.githubusercontent.com/karais89/agent-skills-for-codex/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
+https://raw.githubusercontent.com/karais89/agent-skills-for-codex/refs/heads/main/harness/INSTALL.md 를 읽고 그대로 따라 해줘.
 
 작업 유형: 새 프로젝트 생성
 
